@@ -9,6 +9,7 @@ class AirsoftSmartMineBLECharacteristics
 public:
   static const char *ServiceUUID;
 
+  static const char *Version;
   static const char *RuntimeInSec;
   static const char *Mode;
   static const char *IsExploded;
@@ -16,7 +17,7 @@ public:
   static const char *ExplodeDurationInMs;
   static const char *IsForceExplodeViaBleInitiated;
 
-  static const char *All[6];
+  static const char *All[7];
 };
 
 #endif

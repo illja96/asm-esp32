@@ -9,7 +9,8 @@ void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onRead(BLECharacte
 {
   ESP_LOGI(_EspLogTag, "onRead");
 
-  pCharacteristic->setValue(false);
+  bool isForceExplodeViaBleInitiated = false;
+  pCharacteristic->setValue((int &)isForceExplodeViaBleInitiated);
 }
 
 void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)

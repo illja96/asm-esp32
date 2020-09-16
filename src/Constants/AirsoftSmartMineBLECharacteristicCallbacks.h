@@ -7,6 +7,7 @@
 #include "AirsoftSmartMineBLECharacteristics.h"
 #include "AirsoftSmartMineBLECharacteristicIndexes.h"
 
+#include "../Callbacks/VersionBLECharacteristicCallbacks.h"
 #include "../Callbacks/RuntimeInSecBLECharacteristicCallbacks.h"
 #include "../Callbacks/ModeBLECharacteristicCallbacks.h"
 #include "../Callbacks/IsExplodedBLECharacteristicCallbacks.h"
@@ -19,6 +20,7 @@
 class AirsoftSmartMineBLECharacteristicCallbacks
 {
 public:
+  static BLECharacteristicCallbacks Version;
   static BLECharacteristicCallbacks RuntimeInSec;
   static BLECharacteristicCallbacks Mode;
   static BLECharacteristicCallbacks IsExploded;

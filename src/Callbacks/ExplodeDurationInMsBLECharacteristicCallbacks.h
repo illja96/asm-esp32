@@ -1,3 +1,6 @@
+#ifndef ExplodeDurationInMsBLECharacteristicCallbacks_H_
+#define ExplodeDurationInMsBLECharacteristicCallbacks_H_
+
 #include <Arduino.h>
 #include <BLEDevice.h>
 
@@ -18,3 +21,5 @@ public:
   void onNotify(BLECharacteristic *pCharacteristic);
   void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code);
 };
+
+#endif

@@ -1,5 +1,6 @@
 #include "AirsoftSmartMineBLECharacteristicCallbacks.h"
 
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::Version;
 BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec;
 BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::Mode;
 BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::IsExploded;
@@ -11,6 +12,9 @@ BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::All[sizeo
 
 void AirsoftSmartMineBLECharacteristicCallbacks::Initialize(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
+AirsoftSmartMineBLECharacteristicCallbacks::Version = VersionBLECharacteristicCallbacks();
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::Version] = AirsoftSmartMineBLECharacteristicCallbacks::Version;
+
   AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec = RuntimeInSecBLECharacteristicCallbacks();
   AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec] = AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec;
 

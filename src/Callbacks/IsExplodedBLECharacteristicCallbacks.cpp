@@ -12,7 +12,7 @@ void IsExplodedBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteri
   bool isExploded = _airsoftSmartMineSettings->GetIsExploded();
   ESP_LOGD(_EspLogTag, "isExploded = %d", isExploded);
 
-  pCharacteristic->setValue(isExploded);
+  pCharacteristic->setValue((int &)isExploded);
 }
 
 void IsExplodedBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)

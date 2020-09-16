@@ -15,7 +15,7 @@
 #include "src/Constants/AirsoftSmartMineBLECharacteristicCallbacks.h"
 #include "src/Callbacks/AirsoftSmartMineBLEServerCallbacks.h"
 
-#define ESP_LOG_TAG "ASM"
+#define ESP_LOG_TAG "Main"
 
 AirsoftSmartMineSettings airsoftSmartMineSettings;
 
@@ -31,6 +31,7 @@ void setup()
   airsoftSmartMineSettings = AirsoftSmartMineSettings();
   AirsoftSmartMineBLECharacteristicCallbacks::Initialize(&airsoftSmartMineSettings);
 
+  ESP_LOGI(ESP_LOG_TAG, "Initializing BLE device");
   BLEDevice::setPower(ESP_PWR_LVL_N12);
   BLEDevice::init("AirsoftSmartMine");
 
@@ -58,7 +59,7 @@ void setup()
     bleCharacteristics[i]->setCallbacks(&AirsoftSmartMineBLECharacteristicCallbacks::All[i]);
   }
 
-  ESP_LOGI(ESP_LOG_TAG, "Starting BLE");
+  ESP_LOGI(ESP_LOG_TAG, "Starting BLE server");
   bleService->start();
   bleServer->getAdvertising()->start();
 }

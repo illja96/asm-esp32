@@ -1,3 +1,6 @@
+#ifndef IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks_H_
+#define IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks_H_
+
 #include <Arduino.h>
 #include <BLEDevice.h>
 
@@ -18,3 +21,5 @@ public:
   void onNotify(BLECharacteristic *pCharacteristic);
   void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code);
 };
+
+#endif

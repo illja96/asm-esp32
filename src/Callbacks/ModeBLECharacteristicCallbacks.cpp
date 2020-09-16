@@ -10,7 +10,7 @@ void ModeBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic)
   ESP_LOGI(_EspLogTag, "onRead");
 
   AirsoftSmartMineMode mode = _airsoftSmartMineSettings->GetMode();
-  pCharacteristic->setValue(mode);
+  pCharacteristic->setValue((int &)mode);
 }
 
 void ModeBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)

@@ -9,6 +9,7 @@
 class AirsoftSmartMineBLECharacteristicProperties
 {
 public:
+  static const uint32_t Version;
   static const uint32_t RuntimeInSec;
   static const uint32_t Mode;
   static const uint32_t IsExploded;

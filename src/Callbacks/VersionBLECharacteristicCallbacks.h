@@ -1,13 +1,15 @@
-#ifndef RuntimeInSecBLECharacteristicCallbacks_H_
-#define RuntimeInSecBLECharacteristicCallbacks_H_
+#ifndef VersionBLECharacteristicCallbacks_H_
+#define VersionBLECharacteristicCallbacks_H_
 
 #include <Arduino.h>
 #include <BLEDevice.h>
 
-class RuntimeInSecBLECharacteristicCallbacks : public BLECharacteristicCallbacks
+#include "../Constants/AirsoftSmartMineBLECharacteristicDefaultValues.h"
+
+class VersionBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "RuntimeInSecBLECharacteristicCallbacks";
+  const char *_EspLogTag = "VersionBLECharacteristicCallbacks";
 
 public:
   void onRead(BLECharacteristic *pCharacteristic);

@@ -9,6 +9,7 @@
 class AirsoftSmartMineBLECharacteristicNames
 {
 public:
+  static const char *Version;
   static const char *RuntimeInSec;
   static const char *Mode;
   static const char *IsExploded;

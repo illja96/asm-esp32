@@ -10,6 +10,8 @@
 class AirsoftSmartMineSettings
 {
 private:
+  const char *_EspLogTag = "AirsoftSmartMineBLEServerCallbacks";
+
   static Preferences _Preferences;
 
   bool _isExploded;
