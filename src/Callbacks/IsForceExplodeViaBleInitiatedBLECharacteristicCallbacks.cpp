@@ -17,7 +17,10 @@ void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onWrite(BLECharact
   ESP_LOGI(_EspLogTag, "onWrite");
 
   std::string isForceExplodeViaBleInitiatedRaw = pCharacteristic->getValue();
+  ESP_LOGD(_EspLogTag, "isForceExplodeViaBleInitiatedRaw = %s", isForceExplodeViaBleInitiatedRaw);
+
   bool isForceExplodeViaBleInitiated = atoi(isForceExplodeViaBleInitiatedRaw.c_str());
+  ESP_LOGD(_EspLogTag, "isForceExplodeViaBleInitiated = %d", isForceExplodeViaBleInitiated);
 
   _airsoftSmartMineSettings->SetIsForceExplodeViaBleInitiated(isForceExplodeViaBleInitiated);
 }

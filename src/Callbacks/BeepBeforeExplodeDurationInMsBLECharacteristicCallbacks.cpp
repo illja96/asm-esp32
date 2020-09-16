@@ -10,7 +10,9 @@ void BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::onRead(BLECharacte
   ESP_LOGI(_EspLogTag, "onRead");
 
   int beepBeforeExplodeDurationInMs = _airsoftSmartMineSettings->GetBeepBeforeExplodeDurationInMs();
-  pCharacteristic->setValue(beepBeforeExplodeDurationInMs);
+  ESP_LOGD(_EspLogTag, "beepBeforeExplodeDurationInMs = %d", beepBeforeExplodeDurationInMs);
+
+  pCharacteristic->setValue(beepBeforeExplodeDurationInMs);  
 }
 
 void BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
@@ -18,7 +20,10 @@ void BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharact
   ESP_LOGI(_EspLogTag, "onWrite");
 
   std::string beepBeforeExplodeDurationInMsRaw = pCharacteristic->getValue();
+  ESP_LOGD(_EspLogTag, "beepBeforeExplodeDurationInMsRaw = %s", beepBeforeExplodeDurationInMsRaw);
+
   unsigned long beepBeforeExplodeDurationInMs = atol(beepBeforeExplodeDurationInMsRaw.c_str());
+  ESP_LOGD(_EspLogTag, "beepBeforeExplodeDurationInMs = %d", beepBeforeExplodeDurationInMs);
 
   if (beepBeforeExplodeDurationInMs < 0 || beepBeforeExplodeDurationInMs > 60000)
   {
@@ -34,6 +39,8 @@ void BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::onNotify(BLECharac
   ESP_LOGI(_EspLogTag, "onNotify");
 
   int beepBeforeExplodeDurationInMs = _airsoftSmartMineSettings->GetBeepBeforeExplodeDurationInMs();
+  ESP_LOGD(_EspLogTag, "beepBeforeExplodeDurationInMs = %d", beepBeforeExplodeDurationInMs);
+
   pCharacteristic->setValue(beepBeforeExplodeDurationInMs);
 }
 

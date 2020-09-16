@@ -18,7 +18,10 @@ void ModeBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
   ESP_LOGI(_EspLogTag, "onWrite");
 
   std::string modeRaw = pCharacteristic->getValue();
+  ESP_LOGD(_EspLogTag, "modeRaw = %s", modeRaw);
+
   int mode = atoi(modeRaw.c_str());
+  ESP_LOGD(_EspLogTag, "mode = %d", mode);
 
   if (mode < AirsoftSmartMineMode::Any || mode > AirsoftSmartMineMode::BleOnly)
   {
@@ -27,6 +30,7 @@ void ModeBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
   }
 
   AirsoftSmartMineMode parsedMode = (AirsoftSmartMineMode)mode;
+  ESP_LOGD(_EspLogTag, "parsedMode = %d", parsedMode);
 
   _airsoftSmartMineSettings->SetMode(parsedMode);
 }

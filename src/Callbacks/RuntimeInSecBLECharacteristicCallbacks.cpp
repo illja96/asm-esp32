@@ -5,7 +5,10 @@ void RuntimeInSecBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacte
   ESP_LOGI(_EspLogTag, "onRead");
 
   unsigned long runtimeInMs = millis();
+  ESP_LOGD(_EspLogTag, "runtimeInMs = %d", runtimeInMs);
+
   uint32_t runtimeInSec = runtimeInMs / 1000;
+  ESP_LOGD(_EspLogTag, "runtimeInSec = %d", runtimeInSec);
 
   pCharacteristic->setValue(runtimeInSec);
 }
@@ -20,7 +23,10 @@ void RuntimeInSecBLECharacteristicCallbacks::onNotify(BLECharacteristic *pCharac
   ESP_LOGI(_EspLogTag, "onNotify");
 
   unsigned long runtimeInMs = millis();
+  ESP_LOGD(_EspLogTag, "runtimeInMs = %d", runtimeInMs);
+
   uint32_t runtimeInSec = runtimeInMs / 1000;
+  ESP_LOGD(_EspLogTag, "runtimeInSec = %d", runtimeInSec);
 
   pCharacteristic->setValue(runtimeInSec);
 }
