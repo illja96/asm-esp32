@@ -6,6 +6,8 @@
 #include <BLE2902.h>
 #include <stdio.h>
 
+#include "src/AirsoftSmartMineSettings.h"
+
 #include "src/Constants/AirsoftSmartMineBLECharacteristics.h"
 #include "src/Constants/AirsoftSmartMineBLECharacteristicNames.h"
 #include "src/Constants/AirsoftSmartMineBLECharacteristicDefaultValues.h"
@@ -15,6 +17,8 @@
 
 #define ESP_LOG_TAG "ASM"
 
+AirsoftSmartMineSettings airsoftSmartMineSettings;
+
 BLEServer *bleServer;
 BLEService *bleService;
 BLECharacteristic *bleCharacteristics[sizeof(AirsoftSmartMineBLECharacteristics::All)];
@@ -23,6 +27,9 @@ BLEDescriptor *bleDescriptors[sizeof(AirsoftSmartMineBLECharacteristics::All)];
 void setup()
 {
   Serial.begin(115200);
+
+  airsoftSmartMineSettings = AirsoftSmartMineSettings();
+  AirsoftSmartMineBLECharacteristicCallbacks::Initialize(&airsoftSmartMineSettings);
 
   BLEDevice::setPower(ESP_PWR_LVL_N12);
   BLEDevice::init("AirsoftSmartMine");

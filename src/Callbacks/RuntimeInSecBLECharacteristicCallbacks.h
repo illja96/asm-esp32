@@ -4,7 +4,7 @@
 class RuntimeInSecBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *EspLogTag = "RuntimeInSecBLECharacteristicCallbacks";
+  const char *_EspLogTag = "RuntimeInSecBLECharacteristicCallbacks";
 
 public:
   void onRead(BLECharacteristic *pCharacteristic);

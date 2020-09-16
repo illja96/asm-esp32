@@ -2,21 +2,21 @@
 
 AirsoftSmartMineBLEServerCallbacks::AirsoftSmartMineBLEServerCallbacks()
 {
-  ESP_LOGI(EspLogTag, "AirsoftSmartMineBLEServerCallbacks");
+  ESP_LOGI(_EspLogTag, "AirsoftSmartMineBLEServerCallbacks");
 
   pinMode(2, OUTPUT);
 }
 
 void AirsoftSmartMineBLEServerCallbacks::onConnect(BLEServer *bleServer)
 {
-  ESP_LOGI(EspLogTag, "onConnect");
+  ESP_LOGI(_EspLogTag, "onConnect");
 
   digitalWrite(2, HIGH);
 };
 
 void AirsoftSmartMineBLEServerCallbacks::onDisconnect(BLEServer *bleServer)
 {
-  ESP_LOGI(EspLogTag, "onDisconnect");
+  ESP_LOGI(_EspLogTag, "onDisconnect");
 
   digitalWrite(2, LOW);
 }
