@@ -6,9 +6,12 @@
 #include <BLE2902.h>
 #include <stdio.h>
 
-#include "src/AirsoftSmartMineMode.h"
-#include "src/AirsoftSmartMineBleConstants.h"
-#include "src/AirsoftSmartMineBLEServerCallbacks.h"
+#include "src/Constants/AirsoftSmartMineBLECharacteristics.h"
+#include "src/Constants/AirsoftSmartMineBLECharacteristicNames.h"
+#include "src/Constants/AirsoftSmartMineBLECharacteristicDefaultValues.h"
+#include "src/Constants/AirsoftSmartMineBLECharacteristicProperties.h"
+#include "src/Constants/AirsoftSmartMineBLECharacteristicCallbacks.h"
+#include "src/Callbacks/AirsoftSmartMineBLEServerCallbacks.h"
 
 #define ESP_LOG_TAG "ASM"
 
@@ -24,46 +27,33 @@ void setup()
   BLEDevice::setPower(ESP_PWR_LVL_N12);
   BLEDevice::init("AirsoftSmartMine");
 
+  ESP_LOGI(ESP_LOG_TAG, "Creating BLE server");
   bleServer = BLEDevice::createServer();
   bleServer->setCallbacks(new AirsoftSmartMineBLEServerCallbacks());
 
-  bleService = bleServer->createService(AirsoftSmartMineBLECharacteristics::ServiceUUID);
+  ESP_LOGI(ESP_LOG_TAG, "Creating BLE service");
+  bleService = bleServer->createService(BLEUUID(AirsoftSmartMineBLECharacteristics::ServiceUUID));
 
-  for (int i = 0; i < sizeof(bleCharacteristics); i++)
+  ESP_LOGI(ESP_LOG_TAG, "Creating BLE characteristics");
+  for (int i = 0; i < sizeof(AirsoftSmartMineBLECharacteristics::All); i++)
   {
-    bleCharacteristics[i] = bleService->createCharacteristic(
-        AirsoftSmartMineBLEConstants::Services.Characteristics.All[i],
-        BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE | BLECharacteristic::PROPERTY_INDICATE);
-    bleCharacteristics[i]->setValue((int &)AirsoftSmartMineBLECharacteristics::Properties.All[i]);
-
-    bleDescriptors[i] = new BLE2902();
-    bleDescriptors[i]->setAccessPermissions(ESP_GATT_PERM_READ_ENCRYPTED | ESP_GATT_PERM_WRITE_ENCRYPTED);
-    bleDescriptors[i]->setValue(AirsoftSmartMineBLEConstants::Services.Characteristics.DescriptorValues.All[i]);
-
-    bleCharacteristics[i]->addDescriptor(bleDescriptors[i]);
-
     ESP_LOGI(
         ESP_LOG_TAG,
-        "Creating characteristic with %s UUID with %d as default value",
-        AirsoftSmartMineBLEConstants::Services.Characteristics.All[i],
-        AirsoftSmartMineBLEConstants::Services.Characteristics.Properties.All[i]);
+        "Creating characteristic with %s (%s) with %d as default value",
+        AirsoftSmartMineBLECharacteristicNames::All[i],
+        AirsoftSmartMineBLECharacteristics::All[i],
+        AirsoftSmartMineBLECharacteristicDefaultValues::All[i]);
+
+    bleCharacteristics[i] = bleService->createCharacteristic(
+        AirsoftSmartMineBLECharacteristics::All[i],
+        AirsoftSmartMineBLECharacteristicProperties::All[i]);
+
+    bleCharacteristics[i]->setCallbacks(&AirsoftSmartMineBLECharacteristicCallbacks::All[i]);
   }
 
+  ESP_LOGI(ESP_LOG_TAG, "Starting BLE");
   bleService->start();
   bleServer->getAdvertising()->start();
-  ESP_LOGI(ESP_LOG_TAG, "Starting BLE");
 }
 
-void loop()
-{
-  delay(1000);
-
-  int values[sizeof(bleCharacteristics)];
-  for (int i = 0; i < sizeof(bleCharacteristics); i++)
-  {
-    std::string valueRaw = bleCharacteristics[i]->getValue();
-    values[i] = atoi(valueRaw.c_str());
-
-    ESP_LOGD(ESP_LOG_TAG, "%s = %d", AirsoftSmartMineBLEConstants::Services.Characteristics.DescriptorValues.All[i], values[i]);
-  }
-}
+void loop() {}

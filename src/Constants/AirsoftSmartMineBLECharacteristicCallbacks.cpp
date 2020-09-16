@@ -1,0 +1,16 @@
+#include "AirsoftSmartMineBLECharacteristicCallbacks.h"
+
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec = RuntimeInSecBLECharacteristicCallbacks();
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::Mode = ModeBLECharacteristicCallbacks();
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::IsExploded = IsExplodedBLECharacteristicCallbacks();
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs = BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks();
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs = ExplodeDurationInMsBLECharacteristicCallbacks();
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::IsForceExplodeViaBleInitiated = IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks();
+
+BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::All[sizeof(AirsoftSmartMineBLECharacteristics::All)] = {
+    RuntimeInSecBLECharacteristicCallbacks(),
+    ModeBLECharacteristicCallbacks(),
+    IsExplodedBLECharacteristicCallbacks(),
+    BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks(),
+    ExplodeDurationInMsBLECharacteristicCallbacks(),
+    IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks()};
