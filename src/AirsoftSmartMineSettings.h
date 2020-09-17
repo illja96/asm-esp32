@@ -22,8 +22,6 @@ public:
   AirsoftSmartMineSettings();
   ~AirsoftSmartMineSettings();
 
-  static void Initialize();
-
   AirsoftSmartMineMode GetMode();
   void SetMode(AirsoftSmartMineMode mode);
 

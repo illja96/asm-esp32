@@ -9,6 +9,9 @@
 
 class AirsoftSmartMineBLECharacteristicDefaultValues
 {
+private:
+  AirsoftSmartMineBLECharacteristicDefaultValues();
+
 public:
   static const int Version;
   static const int RuntimeInSec;

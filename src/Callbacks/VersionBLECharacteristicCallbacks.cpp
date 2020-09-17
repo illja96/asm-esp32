@@ -1,5 +1,10 @@
 #include "VersionBLECharacteristicCallbacks.h"
 
+VersionBLECharacteristicCallbacks::VersionBLECharacteristicCallbacks()
+{
+  ESP_LOGI(_EspLogTag, "VersionBLECharacteristicCallbacks");
+}
+
 void VersionBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic)
 {
   ESP_LOGI(_EspLogTag, "onRead");

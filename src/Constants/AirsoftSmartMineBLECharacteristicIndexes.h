@@ -6,6 +6,9 @@
 
 class AirsoftSmartMineBLECharacteristicIndexes
 {
+private:
+  AirsoftSmartMineBLECharacteristicIndexes();
+
 public:
   static const int Version;
   static const int RuntimeInSec;

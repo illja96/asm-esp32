@@ -9,6 +9,9 @@ class RuntimeInSecBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 private:
   const char *_EspLogTag = "RuntimeInSecBLECharacteristicCallbacks";
 
+  RuntimeInSecBLECharacteristicCallbacks();
+  friend class AirsoftSmartMineBLECharacteristicCallbacks;
+
 public:
   void onRead(BLECharacteristic *pCharacteristic);
   void onWrite(BLECharacteristic *pCharacteristic);

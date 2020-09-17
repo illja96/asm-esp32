@@ -1,5 +1,10 @@
 #include "RuntimeInSecBLECharacteristicCallbacks.h"
 
+RuntimeInSecBLECharacteristicCallbacks::RuntimeInSecBLECharacteristicCallbacks()
+{
+  ESP_LOGI(_EspLogTag, "RuntimeInSecBLECharacteristicCallbacks");
+}
+
 void RuntimeInSecBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic)
 {
   ESP_LOGI(_EspLogTag, "onRead");

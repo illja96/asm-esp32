@@ -11,6 +11,9 @@ class VersionBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 private:
   const char *_EspLogTag = "VersionBLECharacteristicCallbacks";
 
+  VersionBLECharacteristicCallbacks();
+  friend class AirsoftSmartMineBLECharacteristicCallbacks;
+
 public:
   void onRead(BLECharacteristic *pCharacteristic);
   void onWrite(BLECharacteristic *pCharacteristic);

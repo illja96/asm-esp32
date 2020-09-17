@@ -22,16 +22,18 @@ class AirsoftSmartMineBLECharacteristicCallbacks
 private:
   const char *_EspLogTag = "AirsoftSmartMineBLECharacteristicCallbacks";
 
+  AirsoftSmartMineBLECharacteristicCallbacks();
+
 public:
   static void Initialize(AirsoftSmartMineSettings *airsoftSmartMineSettings);
 
-  static BLECharacteristicCallbacks Version;
-  static BLECharacteristicCallbacks RuntimeInSec;
-  static BLECharacteristicCallbacks Mode;
-  static BLECharacteristicCallbacks IsExploded;
-  static BLECharacteristicCallbacks BeepBeforeExplodeDurationInMs;
-  static BLECharacteristicCallbacks ExplodeDurationInMs;
-  static BLECharacteristicCallbacks IsForceExplodeViaBleInitiated;
+  static BLECharacteristicCallbacks *Version;
+  static BLECharacteristicCallbacks *RuntimeInSec;
+  static BLECharacteristicCallbacks *Mode;
+  static BLECharacteristicCallbacks *IsExploded;
+  static BLECharacteristicCallbacks *BeepBeforeExplodeDurationInMs;
+  static BLECharacteristicCallbacks *ExplodeDurationInMs;
+  static BLECharacteristicCallbacks *IsForceExplodeViaBleInitiated;
 
   static BLECharacteristicCallbacks *All[AirsoftSmartMineBLECharacteristics::AllLength];
 };

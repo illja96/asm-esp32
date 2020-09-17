@@ -6,6 +6,9 @@
 
 class AirsoftSmartMineBLECharacteristics
 {
+private:
+  AirsoftSmartMineBLECharacteristics();
+
 public:
   static const char *ServiceUUID;
 

@@ -17,11 +17,11 @@
 
 #define ESP_LOG_TAG "Main"
 
-AirsoftSmartMineBLEServerCallbacks airsoftSmartMineBLEServerCallbacks;
-AirsoftSmartMineSettings airsoftSmartMineSettings;
+AirsoftSmartMineBLEServerCallbacks *airsoftSmartMineBLEServerCallbacks = nullptr;
+AirsoftSmartMineSettings *airsoftSmartMineSettings = nullptr;
 
-BLEServer *bleServer;
-BLEService *bleService;
+BLEServer *bleServer = nullptr;
+BLEService *bleService = nullptr;
 BLECharacteristic *bleCharacteristics[AirsoftSmartMineBLECharacteristics::AllLength];
 BLEDescriptor *bleDescriptors[AirsoftSmartMineBLECharacteristics::AllLength];
 
@@ -29,9 +29,12 @@ void setup()
 {
   Serial.begin(115200);
 
-  AirsoftSmartMineSettings::Initialize();
+  ESP_LOGI(ESP_LOG_TAG, "setup");
 
-  AirsoftSmartMineBLECharacteristicCallbacks::Initialize(&airsoftSmartMineSettings);
+  airsoftSmartMineBLEServerCallbacks = new AirsoftSmartMineBLEServerCallbacks();
+  airsoftSmartMineSettings = new AirsoftSmartMineSettings();
+
+  AirsoftSmartMineBLECharacteristicCallbacks::Initialize(airsoftSmartMineSettings);
 
   ESP_LOGI(ESP_LOG_TAG, "Initializing BLE device");
   BLEDevice::setPower(ESP_PWR_LVL_N12);
@@ -39,10 +42,10 @@ void setup()
 
   ESP_LOGI(ESP_LOG_TAG, "Creating BLE server");
   bleServer = BLEDevice::createServer();
-  bleServer->setCallbacks(&airsoftSmartMineBLEServerCallbacks);
+  bleServer->setCallbacks(airsoftSmartMineBLEServerCallbacks);
 
   ESP_LOGI(ESP_LOG_TAG, "Creating BLE service");
-  bleService = bleServer->createService(BLEUUID(AirsoftSmartMineBLECharacteristics::ServiceUUID));
+  bleService = bleServer->createService(AirsoftSmartMineBLECharacteristics::ServiceUUID);
 
   ESP_LOGI(ESP_LOG_TAG, "Creating BLE characteristics");
   for (int i = 0; i < AirsoftSmartMineBLECharacteristics::AllLength; i++)
@@ -66,4 +69,8 @@ void setup()
   bleServer->getAdvertising()->start();
 }
 
-void loop() {}
+void loop()
+{
+  delay(1000);
+  bleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec]->notify();
+}

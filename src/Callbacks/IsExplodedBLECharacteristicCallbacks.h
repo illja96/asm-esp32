@@ -13,9 +13,10 @@ private:
 
   AirsoftSmartMineSettings *_airsoftSmartMineSettings;
 
-public:
   IsExplodedBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings);
+  friend class AirsoftSmartMineBLECharacteristicCallbacks;
 
+public:
   void onRead(BLECharacteristic *pCharacteristic);
   void onWrite(BLECharacteristic *pCharacteristic);
   void onNotify(BLECharacteristic *pCharacteristic);
