@@ -8,7 +8,7 @@ const int AirsoftSmartMineBLECharacteristicDefaultValues::BeepBeforeExplodeDurat
 const int AirsoftSmartMineBLECharacteristicDefaultValues::ExplodeDurationInMs = 0;
 const int AirsoftSmartMineBLECharacteristicDefaultValues::IsForceExplodeViaBleInitiated = false;
 
-const int AirsoftSmartMineBLECharacteristicDefaultValues::All[sizeof(AirsoftSmartMineBLECharacteristics::All)] = {
+const int AirsoftSmartMineBLECharacteristicDefaultValues::All[AirsoftSmartMineBLECharacteristics::AllLength] = {
     AirsoftSmartMineBLECharacteristicDefaultValues::Version,
     AirsoftSmartMineBLECharacteristicDefaultValues::RuntimeInSec,
     AirsoftSmartMineBLECharacteristicDefaultValues::Mode,

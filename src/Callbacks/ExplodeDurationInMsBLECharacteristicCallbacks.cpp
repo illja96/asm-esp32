@@ -2,6 +2,8 @@
 
 ExplodeDurationInMsBLECharacteristicCallbacks::ExplodeDurationInMsBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
+  ESP_LOGI(_EspLogTag, "ExplodeDurationInMsBLECharacteristicCallbacks");
+
   _airsoftSmartMineSettings = airsoftSmartMineSettings;
 }
 
@@ -40,7 +42,7 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onNotify(BLECharacteristic *
 
   int explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
   ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
-  
+
   pCharacteristic->setValue(explodeDurationInMs);
 }
 

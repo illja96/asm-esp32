@@ -8,28 +8,30 @@ BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::BeepBefor
 BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs;
 BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::IsForceExplodeViaBleInitiated;
 
-BLECharacteristicCallbacks AirsoftSmartMineBLECharacteristicCallbacks::All[sizeof(AirsoftSmartMineBLECharacteristics::All)];
+BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristics::AllLength];
 
 void AirsoftSmartMineBLECharacteristicCallbacks::Initialize(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
-AirsoftSmartMineBLECharacteristicCallbacks::Version = VersionBLECharacteristicCallbacks();
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::Version] = AirsoftSmartMineBLECharacteristicCallbacks::Version;
+  ESP_LOGI(_EspLogTag, "Initialize");
+
+  AirsoftSmartMineBLECharacteristicCallbacks::Version = VersionBLECharacteristicCallbacks();
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::Version] = &AirsoftSmartMineBLECharacteristicCallbacks::Version;
 
   AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec = RuntimeInSecBLECharacteristicCallbacks();
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec] = AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec;
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec] = &AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec;
 
   AirsoftSmartMineBLECharacteristicCallbacks::Mode = ModeBLECharacteristicCallbacks(airsoftSmartMineSettings);
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::Mode] = AirsoftSmartMineBLECharacteristicCallbacks::Mode;
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::Mode] = &AirsoftSmartMineBLECharacteristicCallbacks::Mode;
 
   AirsoftSmartMineBLECharacteristicCallbacks::IsExploded = IsExplodedBLECharacteristicCallbacks(airsoftSmartMineSettings);
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::IsExploded] = AirsoftSmartMineBLECharacteristicCallbacks::IsExploded;
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::IsExploded] = &AirsoftSmartMineBLECharacteristicCallbacks::IsExploded;
 
   AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs = BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks(airsoftSmartMineSettings);
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::BeepBeforeExplodeDurationInMs] = AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs;
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::BeepBeforeExplodeDurationInMs] = &AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs;
 
   AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs = ExplodeDurationInMsBLECharacteristicCallbacks(airsoftSmartMineSettings);
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::ExplodeDurationInMs] = AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs;
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::ExplodeDurationInMs] = &AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs;
 
   AirsoftSmartMineBLECharacteristicCallbacks::IsForceExplodeViaBleInitiated = IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks(airsoftSmartMineSettings);
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::IsForceExplodeViaBleInitiated] = AirsoftSmartMineBLECharacteristicCallbacks::IsForceExplodeViaBleInitiated;
+  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::IsForceExplodeViaBleInitiated] = &AirsoftSmartMineBLECharacteristicCallbacks::IsForceExplodeViaBleInitiated;
 }

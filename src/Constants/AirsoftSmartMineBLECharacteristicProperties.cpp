@@ -8,7 +8,7 @@ const uint32_t AirsoftSmartMineBLECharacteristicProperties::BeepBeforeExplodeDur
 const uint32_t AirsoftSmartMineBLECharacteristicProperties::ExplodeDurationInMs = BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE | BLECharacteristic::PROPERTY_INDICATE;
 const uint32_t AirsoftSmartMineBLECharacteristicProperties::IsForceExplodeViaBleInitiated = BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE | BLECharacteristic::PROPERTY_INDICATE;
 
-const uint32_t AirsoftSmartMineBLECharacteristicProperties::All[sizeof(AirsoftSmartMineBLECharacteristics::All)] = {
+const uint32_t AirsoftSmartMineBLECharacteristicProperties::All[AirsoftSmartMineBLECharacteristics::AllLength] = {
     AirsoftSmartMineBLECharacteristicProperties::Version,
     AirsoftSmartMineBLECharacteristicProperties::RuntimeInSec,
     AirsoftSmartMineBLECharacteristicProperties::Mode,

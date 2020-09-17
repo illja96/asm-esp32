@@ -6,8 +6,6 @@ AirsoftSmartMineSettings::AirsoftSmartMineSettings()
 {
   ESP_LOGI(_EspLogTag, "AirsoftSmartMineSettings");
 
-  _Preferences.begin("nvs", false);
-
   _isExploded = false;
   _isForceExplodeViaBleInitiated = false;
 }
@@ -17,6 +15,21 @@ AirsoftSmartMineSettings::~AirsoftSmartMineSettings()
   ESP_LOGI(_EspLogTag, "~AirsoftSmartMineSettings");
 
   _Preferences.end();
+}
+
+void AirsoftSmartMineSettings::Initialize()
+{
+  ESP_LOGI(_EspLogTag, "Initialize");
+
+  esp_err_t err_init = nvs_flash_init();
+  if (err_init == ESP_ERR_NVS_NO_FREE_PAGES || err_init == ESP_ERR_NVS_NEW_VERSION_FOUND)
+  {
+    ESP_ERROR_CHECK(nvs_flash_erase());
+    err_init = nvs_flash_init();
+  }
+  ESP_ERROR_CHECK(err_init);
+
+  _Preferences.begin("nvs", false);
 }
 
 AirsoftSmartMineMode AirsoftSmartMineSettings::GetMode()

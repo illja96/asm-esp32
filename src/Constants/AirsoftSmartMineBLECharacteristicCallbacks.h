@@ -19,7 +19,12 @@
 
 class AirsoftSmartMineBLECharacteristicCallbacks
 {
+private:
+  const char *_EspLogTag = "AirsoftSmartMineBLECharacteristicCallbacks";
+
 public:
+  static void Initialize(AirsoftSmartMineSettings *airsoftSmartMineSettings);
+
   static BLECharacteristicCallbacks Version;
   static BLECharacteristicCallbacks RuntimeInSec;
   static BLECharacteristicCallbacks Mode;
@@ -28,9 +33,7 @@ public:
   static BLECharacteristicCallbacks ExplodeDurationInMs;
   static BLECharacteristicCallbacks IsForceExplodeViaBleInitiated;
 
-  static BLECharacteristicCallbacks All[sizeof(AirsoftSmartMineBLECharacteristics::All)];
-
-  static void Initialize(AirsoftSmartMineSettings* airsoftSmartMineSettings);
+  static BLECharacteristicCallbacks *All[AirsoftSmartMineBLECharacteristics::AllLength];
 };
 
 #endif

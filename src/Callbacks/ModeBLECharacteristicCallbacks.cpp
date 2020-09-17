@@ -2,6 +2,8 @@
 
 ModeBLECharacteristicCallbacks::ModeBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
+  ESP_LOGI(_EspLogTag, "ModeBLECharacteristicCallbacks");
+
   _airsoftSmartMineSettings = airsoftSmartMineSettings;
 }
 

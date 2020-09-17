@@ -1,5 +1,5 @@
-#ifndef AirsoftSmartMineBLECharacteristicSizeOfs_H_
-#define AirsoftSmartMineBLECharacteristicSizeOfs_H_
+#ifndef AirsoftSmartMineBLECharacteristicNames_H_
+#define AirsoftSmartMineBLECharacteristicNames_H_
 
 #include <Arduino.h>
 #include <BLEDevice.h>
@@ -17,7 +17,7 @@ public:
   static const char *ExplodeDurationInMs;
   static const char *IsForceExplodeViaBleInitiated;
 
-  static const char *All[sizeof(AirsoftSmartMineBLECharacteristics::All)];
+  static const char *All[AirsoftSmartMineBLECharacteristics::AllLength];
 };
 
 #endif

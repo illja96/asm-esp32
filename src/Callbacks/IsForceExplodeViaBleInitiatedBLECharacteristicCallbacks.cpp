@@ -2,6 +2,8 @@
 
 IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
+  ESP_LOGI(_EspLogTag, "IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks");
+
   _airsoftSmartMineSettings = airsoftSmartMineSettings;
 }
 

@@ -17,7 +17,8 @@ public:
   static const char *ExplodeDurationInMs;
   static const char *IsForceExplodeViaBleInitiated;
 
-  static const char *All[7];
+  static const int AllLength = 7;
+  static const char *All[AllLength];
 };
 
 #endif

@@ -18,7 +18,7 @@ public:
   static const int ExplodeDurationInMs;
   static const int IsForceExplodeViaBleInitiated;
 
-  static const int All[sizeof(AirsoftSmartMineBLECharacteristics::All)];
+  static const int All[AirsoftSmartMineBLECharacteristics::AllLength];
 };
 
 #endif

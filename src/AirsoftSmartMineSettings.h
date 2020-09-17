@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <Preferences.h>
+#include <nvs_flash.h>
 
 #include "AirsoftSmartMineMode.h"
 #include "Constants/AirsoftSmartMineBLECharacteristicNames.h"
@@ -20,6 +21,8 @@ private:
 public:
   AirsoftSmartMineSettings();
   ~AirsoftSmartMineSettings();
+
+  static void Initialize();
 
   AirsoftSmartMineMode GetMode();
   void SetMode(AirsoftSmartMineMode mode);

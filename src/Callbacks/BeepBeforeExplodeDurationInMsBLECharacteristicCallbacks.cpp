@@ -2,6 +2,8 @@
 
 BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
+  ESP_LOGI(_EspLogTag, "BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks");
+
   _airsoftSmartMineSettings = airsoftSmartMineSettings;
 }
 
@@ -12,7 +14,7 @@ void BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::onRead(BLECharacte
   int beepBeforeExplodeDurationInMs = _airsoftSmartMineSettings->GetBeepBeforeExplodeDurationInMs();
   ESP_LOGD(_EspLogTag, "beepBeforeExplodeDurationInMs = %d", beepBeforeExplodeDurationInMs);
 
-  pCharacteristic->setValue(beepBeforeExplodeDurationInMs);  
+  pCharacteristic->setValue(beepBeforeExplodeDurationInMs);
 }
 
 void BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
