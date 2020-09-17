@@ -33,7 +33,7 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharacteristic *p
     return;
   }
 
-  _airsoftSmartMineSettings->SetBeepBeforeExplodeDurationInMs(explodeDurationInMs);
+  _airsoftSmartMineSettings->SetExplodeDurationInMs(explodeDurationInMs);
 }
 
 void ExplodeDurationInMsBLECharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteristic)
