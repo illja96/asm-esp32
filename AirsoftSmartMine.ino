@@ -21,9 +21,13 @@ AirsoftSmartMineBLEServerCallbacks *airsoftSmartMineBLEServerCallbacks = nullptr
 AirsoftSmartMineSettings *airsoftSmartMineSettings = nullptr;
 
 BLEServer *bleServer = nullptr;
-BLEService *bleService = nullptr;
-BLECharacteristic *bleCharacteristics[AirsoftSmartMineBLECharacteristics::AllLength];
-BLEDescriptor *bleDescriptors[AirsoftSmartMineBLECharacteristics::AllLength];
+
+BLEService *batteryBleService = nullptr;
+BLECharacteristic *batteryBleCharacteristic = nullptr;
+int batteryLevel = 100;
+
+BLEService *customBleService = nullptr;
+BLECharacteristic *customBleCharacteristics[AirsoftSmartMineBLECharacteristics::AllLength];
 
 void setup()
 {
@@ -44,33 +48,47 @@ void setup()
   bleServer = BLEDevice::createServer();
   bleServer->setCallbacks(airsoftSmartMineBLEServerCallbacks);
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating BLE service");
-  bleService = bleServer->createService(AirsoftSmartMineBLECharacteristics::ServiceUUID);
+  ESP_LOGI(ESP_LOG_TAG, "Creating battery BLE service");
+  batteryBleService = bleServer->createService(BLEUUID((uint16_t)0x180F));
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating BLE characteristics");
+  ESP_LOGI(ESP_LOG_TAG, "Creating battery BLE characteristic");
+  batteryBleCharacteristic = batteryBleService->createCharacteristic(
+      BLEUUID((uint16_t)0x2A19),
+      BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_NOTIFY | BLECharacteristic::PROPERTY_INDICATE);
+  batteryBleCharacteristic->setValue(batteryLevel);
+
+  ESP_LOGI(ESP_LOG_TAG, "Creating custom BLE service");
+  customBleService = bleServer->createService(AirsoftSmartMineBLECharacteristics::ServiceUUID);
+
+  ESP_LOGI(ESP_LOG_TAG, "Creating custom BLE characteristics");
   for (int i = 0; i < AirsoftSmartMineBLECharacteristics::AllLength; i++)
   {
     ESP_LOGI(
         ESP_LOG_TAG,
-        "Creating characteristic with %s (%s) with %d as default value",
+        "Creating custom BLE characteristic with %s (%s) with %d as default value",
         AirsoftSmartMineBLECharacteristicNames::All[i],
         AirsoftSmartMineBLECharacteristics::All[i],
         AirsoftSmartMineBLECharacteristicDefaultValues::All[i]);
 
-    bleCharacteristics[i] = bleService->createCharacteristic(
+    customBleCharacteristics[i] = customBleService->createCharacteristic(
         AirsoftSmartMineBLECharacteristics::All[i],
         AirsoftSmartMineBLECharacteristicProperties::All[i]);
 
-    bleCharacteristics[i]->setCallbacks(AirsoftSmartMineBLECharacteristicCallbacks::All[i]);
+    customBleCharacteristics[i]->setCallbacks(AirsoftSmartMineBLECharacteristicCallbacks::All[i]);
   }
 
+  ESP_LOGI(ESP_LOG_TAG, "Starting battery BLE service");
+  batteryBleService->start();
+
+  ESP_LOGI(ESP_LOG_TAG, "Starting custom BLE service");
+  customBleService->start();
+
   ESP_LOGI(ESP_LOG_TAG, "Starting BLE server");
-  bleService->start();
   bleServer->getAdvertising()->start();
 }
 
 void loop()
 {
   delay(1000);
-  bleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec]->notify();
+  // customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec]->notify();
 }
