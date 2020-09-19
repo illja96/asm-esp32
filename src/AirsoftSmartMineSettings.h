@@ -28,9 +28,6 @@ public:
   bool GetIsExploded();
   void SetIsExploded(bool isExploded);
 
-  unsigned long GetBeepBeforeExplodeDurationInMs();
-  void SetBeepBeforeExplodeDurationInMs(unsigned long beepBeforeExplodeDurationInMs);
-
   unsigned long GetExplodeDurationInMs();
   void SetExplodeDurationInMs(unsigned long explodeDurationInMs);
 

@@ -11,7 +11,6 @@
 #include "../Callbacks/RuntimeInSecBLECharacteristicCallbacks.h"
 #include "../Callbacks/ModeBLECharacteristicCallbacks.h"
 #include "../Callbacks/IsExplodedBLECharacteristicCallbacks.h"
-#include "../Callbacks/BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks.h"
 #include "../Callbacks/ExplodeDurationInMsBLECharacteristicCallbacks.h"
 #include "../Callbacks/IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks.h"
 
@@ -31,7 +30,6 @@ public:
   static BLECharacteristicCallbacks *RuntimeInSec;
   static BLECharacteristicCallbacks *Mode;
   static BLECharacteristicCallbacks *IsExploded;
-  static BLECharacteristicCallbacks *BeepBeforeExplodeDurationInMs;
   static BLECharacteristicCallbacks *ExplodeDurationInMs;
   static BLECharacteristicCallbacks *IsForceExplodeViaBleInitiated;
 

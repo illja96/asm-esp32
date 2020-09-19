@@ -16,7 +16,6 @@ public:
   static const char *RuntimeInSec;
   static const char *Mode;
   static const char *IsExploded;
-  static const char *BeepBeforeExplodeDurationInMs;
   static const char *ExplodeDurationInMs;
   static const char *IsForceExplodeViaBleInitiated;
 

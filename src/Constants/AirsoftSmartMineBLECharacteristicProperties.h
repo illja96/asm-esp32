@@ -16,7 +16,6 @@ public:
   static const uint32_t RuntimeInSec;
   static const uint32_t Mode;
   static const uint32_t IsExploded;
-  static const uint32_t BeepBeforeExplodeDurationInMs;
   static const uint32_t ExplodeDurationInMs;
   static const uint32_t IsForceExplodeViaBleInitiated;
 

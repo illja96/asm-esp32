@@ -61,21 +61,6 @@ void AirsoftSmartMineSettings::SetIsExploded(bool isExploded)
   _isExploded = isExploded;
 }
 
-unsigned long AirsoftSmartMineSettings::GetBeepBeforeExplodeDurationInMs()
-{
-  ESP_LOGI(_EspLogTag, "GetBeepBeforeExplodeDurationInMs");
-
-  const unsigned long defaultBeepBeforeExplodeDurationInMs = 1000;
-  return _Preferences.getULong(AirsoftSmartMineBLECharacteristicNames::BeepBeforeExplodeDurationInMs, defaultBeepBeforeExplodeDurationInMs);
-}
-
-void AirsoftSmartMineSettings::SetBeepBeforeExplodeDurationInMs(unsigned long beepBeforeExplodeDurationInMs)
-{
-  ESP_LOGI(_EspLogTag, "SetBeepBeforeExplodeDurationInMs");
-
-  _Preferences.putULong(AirsoftSmartMineBLECharacteristicNames::BeepBeforeExplodeDurationInMs, beepBeforeExplodeDurationInMs);
-}
-
 unsigned long AirsoftSmartMineSettings::GetExplodeDurationInMs()
 {
   ESP_LOGI(_EspLogTag, "GetExplodeDurationInMs");

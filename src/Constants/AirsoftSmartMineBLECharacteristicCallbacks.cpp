@@ -4,7 +4,6 @@ BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Version 
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Mode = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::IsExploded = nullptr;
-BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::IsForceExplodeViaBleInitiated = nullptr;
 
@@ -25,9 +24,6 @@ void AirsoftSmartMineBLECharacteristicCallbacks::Initialize(AirsoftSmartMineSett
 
   AirsoftSmartMineBLECharacteristicCallbacks::IsExploded = new IsExplodedBLECharacteristicCallbacks(airsoftSmartMineSettings);
   AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::IsExploded] = AirsoftSmartMineBLECharacteristicCallbacks::IsExploded;
-
-  AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs = new BeepBeforeExplodeDurationInMsBLECharacteristicCallbacks(airsoftSmartMineSettings);
-  AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::BeepBeforeExplodeDurationInMs] = AirsoftSmartMineBLECharacteristicCallbacks::BeepBeforeExplodeDurationInMs;
 
   AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs = new ExplodeDurationInMsBLECharacteristicCallbacks(airsoftSmartMineSettings);
   AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::ExplodeDurationInMs] = AirsoftSmartMineBLECharacteristicCallbacks::ExplodeDurationInMs;

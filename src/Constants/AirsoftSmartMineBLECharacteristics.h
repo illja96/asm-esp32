@@ -16,11 +16,10 @@ public:
   static const char *RuntimeInSec;
   static const char *Mode;
   static const char *IsExploded;
-  static const char *BeepBeforeExplodeDurationInMs;
   static const char *ExplodeDurationInMs;
   static const char *IsForceExplodeViaBleInitiated;
 
-  static const int AllLength = 7;
+  static const int AllLength = 6;
   static const char *All[AllLength];
 };
 
