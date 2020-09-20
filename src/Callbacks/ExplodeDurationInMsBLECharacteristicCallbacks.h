@@ -9,7 +9,7 @@
 class ExplodeDurationInMsBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "ExplodeDurationInMsBLECharacteristicCallbacks";
+  static const std::string _EspLogTag;
 
   AirsoftSmartMineSettings *_airsoftSmartMineSettings;
 

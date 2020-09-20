@@ -16,7 +16,7 @@
 #include "src/Callbacks/AirsoftSmartMineBLEServerCallbacks.h"
 #include "src/Callbacks/AirsoftSmartMineBLEServerSecurityCallbacks.h"
 
-#define ESP_LOG_TAG "Main"
+const std::string _EspLogTag = "Main";
 
 AirsoftSmartMineBLEServerCallbacks *airsoftSmartMineBLEServerCallbacks = nullptr;
 AirsoftSmartMineBLEServerSecurityCallbacks *airsoftSmartMineBLEServerSecurityCallbacks = nullptr;
@@ -28,7 +28,7 @@ BLESecurity *bleSecurity = nullptr;
 
 BLEService *batteryBleService = nullptr;
 BLECharacteristic *batteryBleCharacteristic = nullptr;
-int batteryLevel = 100;
+uint8_t batteryLevel = 100;
 
 BLEService *customBleService = nullptr;
 BLECharacteristic *customBleCharacteristics[AirsoftSmartMineBLECharacteristics::AllLength];
@@ -37,7 +37,7 @@ void setup()
 {
   Serial.begin(115200);
 
-  ESP_LOGI(ESP_LOG_TAG, "setup");
+  ESP_LOGI(_EspLogTag, "setup");
 
   airsoftSmartMineBLEServerCallbacks = new AirsoftSmartMineBLEServerCallbacks();
   airsoftSmartMineBLEServerSecurityCallbacks = new AirsoftSmartMineBLEServerSecurityCallbacks();
@@ -45,37 +45,49 @@ void setup()
 
   AirsoftSmartMineBLECharacteristicCallbacks::Initialize(airsoftSmartMineSettings);
 
-  ESP_LOGI(ESP_LOG_TAG, "Initializing BLE device");
+  ESP_LOGI(_EspLogTag, "Initializing BLE device");
   BLEDevice::init("Airsoft smart mine");
+
+  std::string bleAddress = BLEDevice::getAddress().toString();
+  ESP_LOGD(_EspLogTag, "bleAddress = %s", bleAddress.c_str());
+
+  bleAddress.erase(std::remove(bleAddress.begin(), bleAddress.end(), ':'), bleAddress.end());
+  ESP_LOGD(_EspLogTag, "bleAddress = %s", bleAddress.c_str());
+
+  std::string bleDeviceName = "ASM " + bleAddress;
+  ESP_LOGD(_EspLogTag, "bleDeviceName = %s", bleDeviceName.c_str());
+
+  BLEDevice::deinit();
+  BLEDevice::init(bleDeviceName);
+
   BLEDevice::setPower(ESP_PWR_LVL_N12);
   BLEDevice::setEncryptionLevel(ESP_BLE_SEC_ENCRYPT);
   BLEDevice::setSecurityCallbacks(airsoftSmartMineBLEServerSecurityCallbacks);
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating BLE server");
+  ESP_LOGI(_EspLogTag, "Creating BLE server");
   bleServer = BLEDevice::createServer();
   bleServer->setCallbacks(airsoftSmartMineBLEServerCallbacks);
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating battery BLE service");
-  batteryBleService = bleServer->createService(BLEUUID((uint16_t)0x180F));
+  ESP_LOGI(_EspLogTag, "Creating battery BLE service");
+  batteryBleService = bleServer->createService("0000180f-0000-1000-8000-00805f9b34fb");
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating battery BLE characteristic");
+  ESP_LOGI(_EspLogTag, "Creating battery BLE characteristic");
   batteryBleCharacteristic = batteryBleService->createCharacteristic(
-      BLEUUID((uint16_t)0x2A19),
+      "00002a19-0000-1000-8000-00805f9b34fb",
       BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_NOTIFY | BLECharacteristic::PROPERTY_INDICATE);
-  batteryBleCharacteristic->setValue(batteryLevel);
+  batteryBleCharacteristic->setValue(&batteryLevel, 1);
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating custom BLE service");
+  ESP_LOGI(_EspLogTag, "Creating custom BLE service");
   customBleService = bleServer->createService(AirsoftSmartMineBLECharacteristics::ServiceUUID);
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating custom BLE characteristics");
-  for (int i = 0; i < AirsoftSmartMineBLECharacteristics::AllLength; i++)
+  ESP_LOGI(_EspLogTag, "Creating custom BLE characteristics");
+  for (uint8_t i = 0; i < AirsoftSmartMineBLECharacteristics::AllLength; i++)
   {
     ESP_LOGI(
-        ESP_LOG_TAG,
-        "Creating custom BLE characteristic with %s (%s) with %d as default value",
-        AirsoftSmartMineBLECharacteristicNames::All[i],
-        AirsoftSmartMineBLECharacteristics::All[i],
-        AirsoftSmartMineBLECharacteristicDefaultValues::All[i]);
+        _EspLogTag,
+        "Creating %s (%s) BLE characteristic",
+        AirsoftSmartMineBLECharacteristicNames::All[i].c_str(),
+        AirsoftSmartMineBLECharacteristics::All[i].c_str());
 
     customBleCharacteristics[i] = customBleService->createCharacteristic(
         AirsoftSmartMineBLECharacteristics::All[i],
@@ -84,17 +96,17 @@ void setup()
     customBleCharacteristics[i]->setCallbacks(AirsoftSmartMineBLECharacteristicCallbacks::All[i]);
   }
 
-  ESP_LOGI(ESP_LOG_TAG, "Starting battery BLE service");
+  ESP_LOGI(_EspLogTag, "Starting battery BLE service");
   batteryBleService->start();
 
-  ESP_LOGI(ESP_LOG_TAG, "Starting custom BLE service");
+  ESP_LOGI(_EspLogTag, "Starting custom BLE service");
   customBleService->start();
 
-  ESP_LOGI(ESP_LOG_TAG, "Starting BLE advertising");
+  ESP_LOGI(_EspLogTag, "Starting BLE advertising");
   bleAdvertising = bleServer->getAdvertising();
   bleAdvertising->start();
 
-  ESP_LOGI(ESP_LOG_TAG, "Creating BLE security");
+  ESP_LOGI(_EspLogTag, "Creating BLE security");
   bleSecurity = new BLESecurity();
 
   uint32_t staticPassKey = AirsoftSmartMineBLEServerSecurityCallbacks::Pin;

@@ -7,10 +7,10 @@
 class AirsoftSmartMineBLEServerSecurityCallbacks : public BLESecurityCallbacks
 {
 private:
-  const char *_EspLogTag = "AirsoftSmartMineBLEServerSecurityCallbacks";
+  static const std::string _EspLogTag;
 
 public:
-  static const int Pin = 123456;
+  static const uint8_t Pin = 123456;
 
   AirsoftSmartMineBLEServerSecurityCallbacks();
 

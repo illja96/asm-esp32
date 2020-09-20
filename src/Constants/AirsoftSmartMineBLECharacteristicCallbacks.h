@@ -19,7 +19,7 @@
 class AirsoftSmartMineBLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "AirsoftSmartMineBLECharacteristicCallbacks";
+  static const std::string _EspLogTag;
 
   AirsoftSmartMineBLECharacteristicCallbacks();
 

@@ -9,7 +9,7 @@
 class ModeBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "ModeBLECharacteristicCallbacks";
+  static const std::string _EspLogTag;
 
   AirsoftSmartMineSettings *_airsoftSmartMineSettings;
 

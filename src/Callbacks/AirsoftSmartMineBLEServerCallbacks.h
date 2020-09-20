@@ -7,7 +7,7 @@
 class AirsoftSmartMineBLEServerCallbacks : public BLEServerCallbacks
 {
 private:
-  const char *_EspLogTag = "AirsoftSmartMineBLEServerCallbacks";
+  static const std::string _EspLogTag;
 
 public:
   AirsoftSmartMineBLEServerCallbacks();

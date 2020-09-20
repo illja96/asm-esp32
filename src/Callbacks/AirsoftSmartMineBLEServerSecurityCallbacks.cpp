@@ -1,5 +1,7 @@
 #include "AirsoftSmartMineBLEServerSecurityCallbacks.h"
 
+const std::string AirsoftSmartMineBLEServerSecurityCallbacks::_EspLogTag = "AirsoftSmartMineBLEServerSecurityCallbacks";
+
 AirsoftSmartMineBLEServerSecurityCallbacks::AirsoftSmartMineBLEServerSecurityCallbacks()
 {
   ESP_LOGI(_EspLogTag, "AirsoftSmartMineBLEServerSecurityCallbacks");

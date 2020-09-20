@@ -7,7 +7,7 @@
 class RuntimeInSecBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "RuntimeInSecBLECharacteristicCallbacks";
+  static const std::string _EspLogTag;
 
   RuntimeInSecBLECharacteristicCallbacks();
   friend class AirsoftSmartMineBLECharacteristicCallbacks;

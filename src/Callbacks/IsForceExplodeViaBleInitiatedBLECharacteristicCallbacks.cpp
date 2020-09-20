@@ -1,5 +1,7 @@
 #include "IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks.h"
 
+const std::string IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::_EspLogTag = "IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks";
+
 IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
   ESP_LOGI(_EspLogTag, "IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks");
@@ -12,7 +14,9 @@ void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onRead(BLECharacte
   ESP_LOGI(_EspLogTag, "onRead");
 
   bool isForceExplodeViaBleInitiated = false;
-  pCharacteristic->setValue((int &)isForceExplodeViaBleInitiated);
+  uint8_t convertedIsForceExplodeViaBleInitiated = (uint8_t)isForceExplodeViaBleInitiated;
+
+  pCharacteristic->setValue(&convertedIsForceExplodeViaBleInitiated, 1);
 }
 
 void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
@@ -20,9 +24,12 @@ void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onWrite(BLECharact
   ESP_LOGI(_EspLogTag, "onWrite");
 
   std::string isForceExplodeViaBleInitiatedRaw = pCharacteristic->getValue();
-  ESP_LOGD(_EspLogTag, "isForceExplodeViaBleInitiatedRaw = %s", isForceExplodeViaBleInitiatedRaw);
+  ESP_LOGD(_EspLogTag, "isForceExplodeViaBleInitiatedRaw = %s", isForceExplodeViaBleInitiatedRaw.c_str());
 
-  bool isForceExplodeViaBleInitiated = atoi(isForceExplodeViaBleInitiatedRaw.c_str());
+  uint8_t parsedIsForceExplodeViaBleInitiated = atoi(isForceExplodeViaBleInitiatedRaw.c_str());
+  ESP_LOGD(_EspLogTag, "parsedIsForceExplodeViaBleInitiated = %d", parsedIsForceExplodeViaBleInitiated);
+
+  bool isForceExplodeViaBleInitiated = (bool)parsedIsForceExplodeViaBleInitiated;
   ESP_LOGD(_EspLogTag, "isForceExplodeViaBleInitiated = %d", isForceExplodeViaBleInitiated);
 
   _airsoftSmartMineSettings->SetIsForceExplodeViaBleInitiated(isForceExplodeViaBleInitiated);

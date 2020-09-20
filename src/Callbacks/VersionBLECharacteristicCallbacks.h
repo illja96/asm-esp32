@@ -9,7 +9,7 @@
 class VersionBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "VersionBLECharacteristicCallbacks";
+  static const std::string _EspLogTag;
 
   VersionBLECharacteristicCallbacks();
   friend class AirsoftSmartMineBLECharacteristicCallbacks;

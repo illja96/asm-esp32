@@ -12,14 +12,14 @@ private:
   AirsoftSmartMineBLECharacteristicNames();
 
 public:
-  static const char *Version;
-  static const char *RuntimeInSec;
-  static const char *Mode;
-  static const char *IsExploded;
-  static const char *ExplodeDurationInMs;
-  static const char *IsForceExplodeViaBleInitiated;
+  static const std::string Version;
+  static const std::string RuntimeInSec;
+  static const std::string Mode;
+  static const std::string IsExploded;
+  static const std::string ExplodeDurationInMs;
+  static const std::string IsForceExplodeViaBleInitiated;
 
-  static const char *All[AirsoftSmartMineBLECharacteristics::AllLength];
+  static const std::string All[AirsoftSmartMineBLECharacteristics::AllLength];
 };
 
 #endif

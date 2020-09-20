@@ -1,8 +1,8 @@
 #include "AirsoftSmartMineBLECharacteristicIndexes.h"
 
-const int AirsoftSmartMineBLECharacteristicIndexes::Version = 0;
-const int AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec = 1;
-const int AirsoftSmartMineBLECharacteristicIndexes::Mode = 2;
-const int AirsoftSmartMineBLECharacteristicIndexes::IsExploded = 3;
-const int AirsoftSmartMineBLECharacteristicIndexes::ExplodeDurationInMs = 4;
-const int AirsoftSmartMineBLECharacteristicIndexes::IsForceExplodeViaBleInitiated = 5;
+const uint8_t AirsoftSmartMineBLECharacteristicIndexes::Version = 0;
+const uint8_t AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec = 1;
+const uint8_t AirsoftSmartMineBLECharacteristicIndexes::Mode = 2;
+const uint8_t AirsoftSmartMineBLECharacteristicIndexes::IsExploded = 3;
+const uint8_t AirsoftSmartMineBLECharacteristicIndexes::ExplodeDurationInMs = 4;
+const uint8_t AirsoftSmartMineBLECharacteristicIndexes::IsForceExplodeViaBleInitiated = 5;

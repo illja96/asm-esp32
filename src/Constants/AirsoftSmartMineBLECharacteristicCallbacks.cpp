@@ -1,5 +1,7 @@
 #include "AirsoftSmartMineBLECharacteristicCallbacks.h"
 
+const std::string AirsoftSmartMineBLECharacteristicCallbacks::_EspLogTag = "AirsoftSmartMineBLECharacteristicCallbacks";
+
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Version = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Mode = nullptr;

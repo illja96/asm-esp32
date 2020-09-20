@@ -9,7 +9,7 @@
 class IsExplodedBLECharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-  const char *_EspLogTag = "IsExplodedBLECharacteristicCallbacks";
+  static const std::string _EspLogTag;
 
   AirsoftSmartMineSettings *_airsoftSmartMineSettings;
 

@@ -1,16 +1,8 @@
 #include "AirsoftSmartMineBLECharacteristicDefaultValues.h"
 
-const int AirsoftSmartMineBLECharacteristicDefaultValues::Version = 0;
-const int AirsoftSmartMineBLECharacteristicDefaultValues::RuntimeInSec = 0;
-const int AirsoftSmartMineBLECharacteristicDefaultValues::Mode = (int)AirsoftSmartMineMode::Any;
-const int AirsoftSmartMineBLECharacteristicDefaultValues::IsExploded = false;
-const int AirsoftSmartMineBLECharacteristicDefaultValues::ExplodeDurationInMs = 0;
-const int AirsoftSmartMineBLECharacteristicDefaultValues::IsForceExplodeViaBleInitiated = false;
-
-const int AirsoftSmartMineBLECharacteristicDefaultValues::All[AirsoftSmartMineBLECharacteristics::AllLength] = {
-    AirsoftSmartMineBLECharacteristicDefaultValues::Version,
-    AirsoftSmartMineBLECharacteristicDefaultValues::RuntimeInSec,
-    AirsoftSmartMineBLECharacteristicDefaultValues::Mode,
-    AirsoftSmartMineBLECharacteristicDefaultValues::IsExploded,
-    AirsoftSmartMineBLECharacteristicDefaultValues::ExplodeDurationInMs,
-    AirsoftSmartMineBLECharacteristicDefaultValues::IsForceExplodeViaBleInitiated};
+const uint8_t AirsoftSmartMineBLECharacteristicDefaultValues::Version = 0;
+const uint32_t AirsoftSmartMineBLECharacteristicDefaultValues::RuntimeInSec = 0;
+const AirsoftSmartMineMode AirsoftSmartMineBLECharacteristicDefaultValues::Mode = AirsoftSmartMineMode::Any;
+const uint8_t AirsoftSmartMineBLECharacteristicDefaultValues::IsExploded = 0;
+const uint32_t AirsoftSmartMineBLECharacteristicDefaultValues::ExplodeDurationInMs = 0;
+const uint8_t AirsoftSmartMineBLECharacteristicDefaultValues::IsForceExplodeViaBleInitiated = 0;

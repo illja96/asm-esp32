@@ -1,13 +1,13 @@
 #include "AirsoftSmartMineBLECharacteristicNames.h"
 
-const char *AirsoftSmartMineBLECharacteristicNames::Version = "Version";
-const char *AirsoftSmartMineBLECharacteristicNames::RuntimeInSec = "RuntimeInSec";
-const char *AirsoftSmartMineBLECharacteristicNames::Mode = "Mode";
-const char *AirsoftSmartMineBLECharacteristicNames::IsExploded = "IsExploded";
-const char *AirsoftSmartMineBLECharacteristicNames::ExplodeDurationInMs = "ExplodeDurationInMs";
-const char *AirsoftSmartMineBLECharacteristicNames::IsForceExplodeViaBleInitiated = "IsForceExplodeViaBleInitiated";
+const std::string AirsoftSmartMineBLECharacteristicNames::Version = "Version";
+const std::string AirsoftSmartMineBLECharacteristicNames::RuntimeInSec = "RuntimeInSec";
+const std::string AirsoftSmartMineBLECharacteristicNames::Mode = "Mode";
+const std::string AirsoftSmartMineBLECharacteristicNames::IsExploded = "IsExploded";
+const std::string AirsoftSmartMineBLECharacteristicNames::ExplodeDurationInMs = "ExplodeDurationInMs";
+const std::string AirsoftSmartMineBLECharacteristicNames::IsForceExplodeViaBleInitiated = "IsForceExplodeViaBleInitiated";
 
-const char *AirsoftSmartMineBLECharacteristicNames::All[AirsoftSmartMineBLECharacteristics::AllLength] = {
+const std::string AirsoftSmartMineBLECharacteristicNames::All[AirsoftSmartMineBLECharacteristics::AllLength] = {
     AirsoftSmartMineBLECharacteristicNames::Version,
     AirsoftSmartMineBLECharacteristicNames::RuntimeInSec,
     AirsoftSmartMineBLECharacteristicNames::Mode,

@@ -13,14 +13,12 @@ private:
   AirsoftSmartMineBLECharacteristicDefaultValues();
 
 public:
-  static const int Version;
-  static const int RuntimeInSec;
-  static const int Mode;
-  static const int IsExploded;
-  static const int ExplodeDurationInMs;
-  static const int IsForceExplodeViaBleInitiated;
-
-  static const int All[AirsoftSmartMineBLECharacteristics::AllLength];
+  static const uint8_t Version;
+  static const uint32_t RuntimeInSec;
+  static const AirsoftSmartMineMode Mode;
+  static const uint8_t IsExploded;
+  static const uint32_t ExplodeDurationInMs;
+  static const uint8_t IsForceExplodeViaBleInitiated;
 };
 
 #endif

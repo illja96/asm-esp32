@@ -1,5 +1,7 @@
 #include "IsExplodedBLECharacteristicCallbacks.h"
 
+const std::string IsExplodedBLECharacteristicCallbacks::_EspLogTag = "IsExplodedBLECharacteristicCallbacks";
+
 IsExplodedBLECharacteristicCallbacks::IsExplodedBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
   ESP_LOGI(_EspLogTag, "IsExplodedBLECharacteristicCallbacks");
@@ -14,7 +16,10 @@ void IsExplodedBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteri
   bool isExploded = _airsoftSmartMineSettings->GetIsExploded();
   ESP_LOGD(_EspLogTag, "isExploded = %d", isExploded);
 
-  pCharacteristic->setValue((int &)isExploded);
+  uint8_t convertedIsExploded = (uint8_t)isExploded;
+  ESP_LOGD(_EspLogTag, "convertedIsExploded = %d", convertedIsExploded);
+
+  pCharacteristic->setValue(&convertedIsExploded, 1);
 }
 
 void IsExplodedBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)

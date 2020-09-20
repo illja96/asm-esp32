@@ -7,12 +7,12 @@
 
 #include "AirsoftSmartMineMode.h"
 #include "Constants/AirsoftSmartMineBLECharacteristicNames.h"
+#include "Constants/AirsoftSmartMineBLECharacteristicDefaultValues.h"
 
 class AirsoftSmartMineSettings
 {
 private:
-  const char *_EspLogTag = "AirsoftSmartMineBLEServerCallbacks";
-
+  static const std::string _EspLogTag;
   static Preferences _Preferences;
 
   bool _isExploded;
@@ -28,8 +28,8 @@ public:
   bool GetIsExploded();
   void SetIsExploded(bool isExploded);
 
-  unsigned long GetExplodeDurationInMs();
-  void SetExplodeDurationInMs(unsigned long explodeDurationInMs);
+  uint32_t GetExplodeDurationInMs();
+  void SetExplodeDurationInMs(uint32_t explodeDurationInMs);
 
   bool GetIsForceExplodeViaBleInitiated();
   void SetIsForceExplodeViaBleInitiated(bool isForceExplodeViaBleInitiated);

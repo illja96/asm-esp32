@@ -1,5 +1,7 @@
 #include "ExplodeDurationInMsBLECharacteristicCallbacks.h"
 
+const std::string ExplodeDurationInMsBLECharacteristicCallbacks::_EspLogTag = "ExplodeDurationInMsBLECharacteristicCallbacks";
+
 ExplodeDurationInMsBLECharacteristicCallbacks::ExplodeDurationInMsBLECharacteristicCallbacks(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
   ESP_LOGI(_EspLogTag, "ExplodeDurationInMsBLECharacteristicCallbacks");
@@ -11,7 +13,7 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onRead(BLECharacteristic *pC
 {
   ESP_LOGI(_EspLogTag, "onRead");
 
-  int explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
+  uint32_t explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
   ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
 
   pCharacteristic->setValue(explodeDurationInMs);
@@ -22,9 +24,9 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharacteristic *p
   ESP_LOGI(_EspLogTag, "onWrite");
 
   std::string explodeDurationInMsRaw = pCharacteristic->getValue();
-  ESP_LOGD(_EspLogTag, "explodeDurationInMsRaw = %s", explodeDurationInMsRaw);
+  ESP_LOGD(_EspLogTag, "explodeDurationInMsRaw = %s", explodeDurationInMsRaw.c_str());
 
-  unsigned long explodeDurationInMs = atol(explodeDurationInMsRaw.c_str());
+  uint32_t explodeDurationInMs = atol(explodeDurationInMsRaw.c_str());
   ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
 
   if (explodeDurationInMs < 1 || explodeDurationInMs > 60000)
@@ -40,7 +42,7 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onNotify(BLECharacteristic *
 {
   ESP_LOGI(_EspLogTag, "onNotify");
 
-  int explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
+  uint32_t explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
   ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
 
   pCharacteristic->setValue(explodeDurationInMs);

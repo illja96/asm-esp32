@@ -1,5 +1,7 @@
 #include "VersionBLECharacteristicCallbacks.h"
 
+const std::string VersionBLECharacteristicCallbacks::_EspLogTag = "VersionBLECharacteristicCallbacks";
+
 VersionBLECharacteristicCallbacks::VersionBLECharacteristicCallbacks()
 {
   ESP_LOGI(_EspLogTag, "VersionBLECharacteristicCallbacks");
@@ -9,8 +11,9 @@ void VersionBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristi
 {
   ESP_LOGI(_EspLogTag, "onRead");
 
-  int version = AirsoftSmartMineBLECharacteristicDefaultValues::Version;
-  pCharacteristic->setValue(version);
+  uint8_t version = AirsoftSmartMineBLECharacteristicDefaultValues::Version;
+
+  pCharacteristic->setValue(&version, 1);
 }
 
 void VersionBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
