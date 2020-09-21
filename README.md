@@ -1,4 +1,6 @@
-# Airsoft Smart Mine ESP32
+# Airsoft Smart Mine ESP32 (ASM ESP32)
+
+ASM ESP32 is a part of ASM solution. This part contains microcontroller code written using Arduino Core for ESP32.
 
 # Requirements
 
