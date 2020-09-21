@@ -14,9 +14,12 @@ void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onRead(BLECharacte
   ESP_LOGI(_EspLogTag, "onRead");
 
   bool isForceExplodeViaBleInitiated = false;
-  uint8_t convertedIsForceExplodeViaBleInitiated = (uint8_t)isForceExplodeViaBleInitiated;
 
-  pCharacteristic->setValue(&convertedIsForceExplodeViaBleInitiated, 1);
+  char isForceExplodeViaBleInitiatedString[2];
+  sprintf(isForceExplodeViaBleInitiatedString, "%d", isForceExplodeViaBleInitiated);
+  ESP_LOGD(_EspLogTag, "isForceExplodeViaBleInitiatedString = %s", isForceExplodeViaBleInitiatedString);
+
+  pCharacteristic->setValue(isForceExplodeViaBleInitiatedString);
 }
 
 void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
@@ -43,4 +46,6 @@ void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onNotify(BLECharac
 void IsForceExplodeViaBleInitiatedBLECharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
 {
   ESP_LOGI(_EspLogTag, "onStatus");
+  ESP_LOGD(_EspLogTag, "s = %d", s);
+  ESP_LOGD(_EspLogTag, "code = %lu", code);
 }

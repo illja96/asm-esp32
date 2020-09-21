@@ -14,9 +14,13 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onRead(BLECharacteristic *pC
   ESP_LOGI(_EspLogTag, "onRead");
 
   uint32_t explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
-  ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
+  ESP_LOGD(_EspLogTag, "explodeDurationInMs = %lu", explodeDurationInMs);
 
-  pCharacteristic->setValue(explodeDurationInMs);
+  char explodeDurationInMsString[10];
+  sprintf(explodeDurationInMsString, "%lu", explodeDurationInMs);
+  ESP_LOGD(_EspLogTag, "explodeDurationInMsString = %s", explodeDurationInMsString);
+
+  pCharacteristic->setValue(explodeDurationInMsString);
 }
 
 void ExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
@@ -26,8 +30,8 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onWrite(BLECharacteristic *p
   std::string explodeDurationInMsRaw = pCharacteristic->getValue();
   ESP_LOGD(_EspLogTag, "explodeDurationInMsRaw = %s", explodeDurationInMsRaw.c_str());
 
-  uint32_t explodeDurationInMs = atol(explodeDurationInMsRaw.c_str());
-  ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
+  uint32_t explodeDurationInMs = atoll(explodeDurationInMsRaw.c_str());
+  ESP_LOGD(_EspLogTag, "explodeDurationInMs = %lu", explodeDurationInMs);
 
   if (explodeDurationInMs < 1 || explodeDurationInMs > 60000)
   {
@@ -43,7 +47,7 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onNotify(BLECharacteristic *
   ESP_LOGI(_EspLogTag, "onNotify");
 
   uint32_t explodeDurationInMs = _airsoftSmartMineSettings->GetExplodeDurationInMs();
-  ESP_LOGD(_EspLogTag, "explodeDurationInMs = %d", explodeDurationInMs);
+  ESP_LOGD(_EspLogTag, "explodeDurationInMs = %lu", explodeDurationInMs);
 
   pCharacteristic->setValue(explodeDurationInMs);
 }
@@ -51,4 +55,7 @@ void ExplodeDurationInMsBLECharacteristicCallbacks::onNotify(BLECharacteristic *
 void ExplodeDurationInMsBLECharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
 {
   ESP_LOGI(_EspLogTag, "onStatus");
+
+  ESP_LOGD(_EspLogTag, "s = %d", s);
+  ESP_LOGD(_EspLogTag, "code = %lu", code);
 }

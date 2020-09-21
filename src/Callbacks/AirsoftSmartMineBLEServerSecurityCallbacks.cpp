@@ -18,7 +18,7 @@ void AirsoftSmartMineBLEServerSecurityCallbacks::onPassKeyNotify(uint32_t pass_k
 {
   ESP_LOGI(_EspLogTag, "onPassKeyNotify");
 
-  ESP_LOGD(_EspLogTag, "pass_key = %d", pass_key);
+  ESP_LOGD(_EspLogTag, "pass_key = %lu", pass_key);
 }
 
 bool AirsoftSmartMineBLEServerSecurityCallbacks::onSecurityRequest()
@@ -39,9 +39,7 @@ bool AirsoftSmartMineBLEServerSecurityCallbacks::onConfirmPIN(uint32_t pin)
 {
   ESP_LOGI(_EspLogTag, "onConfirmPIN");
 
-  ESP_LOGD(_EspLogTag, "pin = %d", pin);
-
-  //delay(5000);
+  ESP_LOGD(_EspLogTag, "pin = %lu", pin);
 
   return true;
 }

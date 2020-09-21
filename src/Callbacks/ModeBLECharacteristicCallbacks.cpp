@@ -14,9 +14,12 @@ void ModeBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic)
   ESP_LOGI(_EspLogTag, "onRead");
 
   AirsoftSmartMineMode mode = _airsoftSmartMineSettings->GetMode();
-  uint8_t convertedMode = (uint8_t)mode;
+  
+  char modeString[2];
+  sprintf(modeString, "%d", mode);
+  ESP_LOGD(_EspLogTag, "modeString = %s", modeString);
 
-  pCharacteristic->setValue(&convertedMode, 1);
+  pCharacteristic->setValue(modeString);
 }
 
 void ModeBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
@@ -49,4 +52,7 @@ void ModeBLECharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteristic
 void ModeBLECharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
 {
   ESP_LOGI(_EspLogTag, "onStatus");
+  
+  ESP_LOGD(_EspLogTag, "s = %d", s);
+  ESP_LOGD(_EspLogTag, "code = %lu", code);
 }

@@ -13,7 +13,11 @@ void VersionBLECharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristi
 
   uint8_t version = AirsoftSmartMineBLECharacteristicDefaultValues::Version;
 
-  pCharacteristic->setValue(&version, 1);
+  char versionString[4];
+  sprintf(versionString, "%d", version);
+  ESP_LOGD(_EspLogTag, "versionString = %s", versionString);
+
+  pCharacteristic->setValue(versionString);
 }
 
 void VersionBLECharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic)
@@ -29,4 +33,7 @@ void VersionBLECharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteris
 void VersionBLECharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
 {
   ESP_LOGI(_EspLogTag, "onStatus");
+
+  ESP_LOGD(_EspLogTag, "s = %d", s);
+  ESP_LOGD(_EspLogTag, "code = %lu", code);
 }
