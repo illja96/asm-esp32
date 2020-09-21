@@ -10,7 +10,7 @@ private:
   static const std::string _EspLogTag;
 
 public:
-  static const uint8_t Pin = 123456;
+  static const uint32_t Pin = 123456;
 
   AirsoftSmartMineBLEServerSecurityCallbacks();
 

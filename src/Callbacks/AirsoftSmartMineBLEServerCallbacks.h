@@ -8,12 +8,15 @@ class AirsoftSmartMineBLEServerCallbacks : public BLEServerCallbacks
 {
 private:
   static const std::string _EspLogTag;
+  bool _isClientConnected;
 
 public:
   AirsoftSmartMineBLEServerCallbacks();
 
   void onConnect(BLEServer *bleServer);
   void onDisconnect(BLEServer *bleServer);
+
+  bool isClientConnected();
 };
 
 #endif
