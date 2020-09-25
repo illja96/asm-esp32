@@ -35,7 +35,10 @@ AirsoftSmartMineMode AirsoftSmartMineSettings::GetMode()
   const AirsoftSmartMineMode defaultMode = AirsoftSmartMineBLECharacteristicDefaultValues::Mode;
   const uint8_t convertedDefaultMode = (uint8_t)defaultMode;
 
-  uint8_t mode = _Preferences.getUChar(AirsoftSmartMineBLECharacteristicNames::Mode.c_str(), convertedDefaultMode);
+  const char *modeKey = AirsoftSmartMineBLECharacteristicNames::Mode.substr(0, 15).c_str();
+  ESP_LOGD(_EspLogTag, "modeKey = %s", modeKey);
+
+  uint8_t mode = _Preferences.getUChar(modeKey, convertedDefaultMode);
   AirsoftSmartMineMode convertedMode = (AirsoftSmartMineMode)mode;
 
   return convertedMode;
@@ -46,7 +49,11 @@ void AirsoftSmartMineSettings::SetMode(AirsoftSmartMineMode mode)
   ESP_LOGI(_EspLogTag, "SetMode");
 
   const uint8_t convertedDefaultMode = (uint8_t)mode;
-  _Preferences.putUChar(AirsoftSmartMineBLECharacteristicNames::IsExploded.c_str(), convertedDefaultMode);
+
+  const char *modeKey = AirsoftSmartMineBLECharacteristicNames::Mode.substr(0, 15).c_str();
+  ESP_LOGD(_EspLogTag, "modeKey = %s", modeKey);
+
+  _Preferences.putUChar(modeKey, convertedDefaultMode);
 }
 
 bool AirsoftSmartMineSettings::GetIsExploded()
@@ -68,14 +75,21 @@ uint32_t AirsoftSmartMineSettings::GetExplodeDurationInMs()
   ESP_LOGI(_EspLogTag, "GetExplodeDurationInMs");
 
   const uint32_t defaultExplodeDurationInMs = AirsoftSmartMineBLECharacteristicDefaultValues::ExplodeDurationInMs;
-  return _Preferences.getULong(AirsoftSmartMineBLECharacteristicNames::ExplodeDurationInMs.c_str(), defaultExplodeDurationInMs);
+
+  const char *explodeDurationInMsKey = AirsoftSmartMineBLECharacteristicNames::ExplodeDurationInMs.substr(0, 15).c_str();
+  ESP_LOGD(_EspLogTag, "explodeDurationInMsKey = %s", explodeDurationInMsKey);
+
+  return _Preferences.getULong(explodeDurationInMsKey, defaultExplodeDurationInMs);
 }
 
 void AirsoftSmartMineSettings::SetExplodeDurationInMs(uint32_t explodeDurationInMs)
 {
   ESP_LOGI(_EspLogTag, "SetExplodeDurationInMs");
 
-  _Preferences.putULong(AirsoftSmartMineBLECharacteristicNames::ExplodeDurationInMs.c_str(), explodeDurationInMs);
+  const char *explodeDurationInMsKey = AirsoftSmartMineBLECharacteristicNames::ExplodeDurationInMs.substr(0, 15).c_str();
+  ESP_LOGD(_EspLogTag, "explodeDurationInMsKey = %s", explodeDurationInMsKey);
+
+  _Preferences.putULong(explodeDurationInMsKey, explodeDurationInMs);
 }
 
 bool AirsoftSmartMineSettings::GetIsForceExplodeViaBleInitiated()

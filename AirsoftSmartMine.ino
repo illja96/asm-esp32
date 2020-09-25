@@ -16,7 +16,7 @@
 #include "src/Callbacks/AirsoftSmartMineBLEServerCallbacks.h"
 #include "src/Callbacks/AirsoftSmartMineBLEServerSecurityCallbacks.h"
 
-const std::string _EspLogTag = "Main";
+const std::string _EspLogTag = "AirsoftSmartMine";
 
 AirsoftSmartMineBLEServerCallbacks *airsoftSmartMineBleServerCallbacks = nullptr;
 AirsoftSmartMineBLEServerSecurityCallbacks *airsoftSmartMineBleServerSecurityCallbacks = nullptr;
@@ -25,10 +25,11 @@ AirsoftSmartMineSettings *airsoftSmartMineSettings = nullptr;
 BLEServer *bleServer = nullptr;
 BLEAdvertising *bleAdvertising = nullptr;
 BLESecurity *bleSecurity = nullptr;
+bool isClientConnected = false;
 
 BLEService *batteryBleService = nullptr;
 BLECharacteristic *batteryBleCharacteristic = nullptr;
-uint8_t batteryLevel = 100;
+uint8_t batteryLevel = 0;
 
 BLEService *customBleService = nullptr;
 BLECharacteristic *customBleCharacteristics[AirsoftSmartMineBLECharacteristics::AllLength];
@@ -130,35 +131,83 @@ void loop()
 {
   ESP_LOGI(_EspLogTag, "loop");
 
-  vTaskDelay(5000 / portTICK_PERIOD_MS);
+  isClientConnected = airsoftSmartMineBleServerCallbacks->isClientConnected();
 
-  const bool isClientConnected = airsoftSmartMineBleServerCallbacks->isClientConnected();
-  if (!isClientConnected)
+  bool isExploded = airsoftSmartMineSettings->GetIsExploded();
+  if (!isExploded)
   {
-    return;
+    checkForExplosionInitiationViaSensor();
+    checkForExplosionInitiationViaBle();
   }
 
-  notifyBatteryCharacteristic();
-  notifyCustomCharacteristics();
+  updateBatteryLevel();
+  notifyRuntimeInSecCharacteristics();
+
+  vTaskDelay(1000 / portTICK_PERIOD_MS);
 }
 
-void notifyBatteryCharacteristic()
+void updateBatteryLevel()
 {
-  ESP_LOGI(_EspLogTag, "notifyBatteryCharacteristic");
+  ESP_LOGI(_EspLogTag, "updateBatteryLevel");
 
-  batteryLevel--;
-  batteryBleCharacteristic->setValue(&batteryLevel, 1);
-  batteryBleCharacteristic->notify();
-  if (batteryLevel == 0)
+  // TODO: Get battery level from real source
+  const uint8_t currentBatteryLevel = 0;
+  if (currentBatteryLevel != batteryLevel)
   {
-    batteryLevel = 100;
+    batteryLevel = currentBatteryLevel;
+    batteryBleCharacteristic->setValue(&batteryLevel, 1);
+
+    if (isClientConnected)
+    {
+      batteryBleCharacteristic->notify();
+      batteryBleCharacteristic->indicate();
+    }
   }
 }
 
-void notifyCustomCharacteristics()
+void checkForExplosionInitiationViaSensor()
 {
-  ESP_LOGI(_EspLogTag, "notifyCustomCharacteristics");
+  ESP_LOGI(_EspLogTag, "checkForExplosionInitiationViaSensor");
 
-  customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec]->notify();
+  // TODO: Get sensor value from real source
+  const uint8_t sensorValue = 0;
+  if (sensorValue > 0)
+  {
+    initiateExplosion();
+  }
+}
+
+void checkForExplosionInitiationViaBle()
+{
+  ESP_LOGI(_EspLogTag, "checkForExplosionInitiationViaBle");
+
+  const bool isForceExplodeViaBleInitiated = airsoftSmartMineSettings->GetIsForceExplodeViaBleInitiated();
+  if (isForceExplodeViaBleInitiated)
+  {
+    initiateExplosion();
+  }
+}
+
+void initiateExplosion()
+{
+  ESP_LOGI(_EspLogTag, "initiateExplosion");
+
+  const uint32_t explodeDurationInMs = airsoftSmartMineSettings->GetExplodeDurationInMs();
+
+  // TODO: Initiate explosion
+  airsoftSmartMineSettings->SetIsExploded(true);
+
   customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::IsExploded]->notify();
+  customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::IsExploded]->indicate();
+}
+
+void notifyRuntimeInSecCharacteristics()
+{
+  ESP_LOGI(_EspLogTag, "notifyRuntimeInSecCharacteristics");
+
+  if (isClientConnected)
+  {
+    customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec]->notify();
+    customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::RuntimeInSec]->indicate();
+  }
 }
