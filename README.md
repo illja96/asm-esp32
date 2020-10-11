@@ -5,7 +5,7 @@ ASM ESP32 is a part of ASM solution. This part contains microcontroller code wri
 # Requirements
 
 Required:
-1. [WEMOS LOLIN32 Lite (CH340)](https://www.aliexpress.com/af/ESP32-CH340.html)
+1. [WEMOS LOLIN D32](https://docs.wemos.cc/en/latest/d32/d32.html)
 2. [HC-SR501 PIR Motion sensor module](https://www.aliexpress.com/af/HC%25252dSR501.html)
 3. [3V Relay](https://www.aliexpress.com/af/3v-relay.html)
 4. Battery
