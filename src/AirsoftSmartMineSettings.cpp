@@ -105,3 +105,33 @@ void AirsoftSmartMineSettings::SetIsForceExplodeViaBleInitiated(bool isForceExpl
 
   _isForceExplodeViaBleInitiated = isForceExplodeViaBleInitiated;
 }
+
+uint8_t AirsoftSmartMineSettings::GetBattery()
+{
+  ESP_LOGI(_EspLogTag, "GetBattery");
+
+  float batteryVoltage = analogRead(AirsoftSmartMinePins::Battery) / 4096.0 * 7.23;
+  ESP_LOGD(_EspLogTag, "batteryVoltage = %f", batteryVoltage);
+
+  const float lowBatteryVoltage = 3.5;
+  const float highBatteryVoltage = 4.19;
+
+  uint8_t batteryPercent = 0;
+
+  if (batteryVoltage <= lowBatteryVoltage)
+  {
+    batteryPercent = 0;
+  }
+
+  if (batteryVoltage > lowBatteryVoltage && batteryVoltage <= highBatteryVoltage)
+  {
+    batteryPercent = 2808.3808 * pow(batteryVoltage, 4) - 43560.9157 * pow(batteryVoltage, 3) + 252848.5888 * pow(batteryVoltage, 2) - 650767.4615 * batteryVoltage + 626532.5703;
+  }
+
+  if (batteryVoltage > highBatteryVoltage)
+  {
+    batteryPercent = 100;
+  }
+
+  return batteryPercent;
+}

@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <BLEDevice.h>
 
+#include "../Constants/AirsoftSmartMinePins.h"
+
 class AirsoftSmartMineBLEServerCallbacks : public BLEServerCallbacks
 {
 private:

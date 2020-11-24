@@ -7,7 +7,8 @@ AirsoftSmartMineBLEServerCallbacks::AirsoftSmartMineBLEServerCallbacks()
   ESP_LOGI(_EspLogTag, "AirsoftSmartMineBLEServerCallbacks");
 
   _isClientConnected = false;
-  pinMode(2, OUTPUT);
+  pinMode(AirsoftSmartMinePins::BlueLed, OUTPUT);
+  digitalWrite(AirsoftSmartMinePins::BlueLed, LOW);
 }
 
 void AirsoftSmartMineBLEServerCallbacks::onConnect(BLEServer *bleServer)
@@ -15,7 +16,7 @@ void AirsoftSmartMineBLEServerCallbacks::onConnect(BLEServer *bleServer)
   ESP_LOGI(_EspLogTag, "onConnect");
 
   _isClientConnected = true;
-  digitalWrite(2, HIGH);
+  digitalWrite(AirsoftSmartMinePins::BlueLed, HIGH);
 };
 
 void AirsoftSmartMineBLEServerCallbacks::onDisconnect(BLEServer *bleServer)
@@ -23,7 +24,7 @@ void AirsoftSmartMineBLEServerCallbacks::onDisconnect(BLEServer *bleServer)
   ESP_LOGI(_EspLogTag, "onDisconnect");
 
   _isClientConnected = false;
-  digitalWrite(2, LOW);
+  digitalWrite(AirsoftSmartMinePins::BlueLed, LOW);
 }
 
 bool AirsoftSmartMineBLEServerCallbacks::isClientConnected()

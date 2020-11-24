@@ -8,6 +8,7 @@
 #include "AirsoftSmartMineMode.h"
 #include "Constants/AirsoftSmartMineBLECharacteristicNames.h"
 #include "Constants/AirsoftSmartMineBLECharacteristicDefaultValues.h"
+#include "Constants/AirsoftSmartMinePins.h"
 
 class AirsoftSmartMineSettings
 {
@@ -33,6 +34,8 @@ public:
 
   bool GetIsForceExplodeViaBleInitiated();
   void SetIsForceExplodeViaBleInitiated(bool isForceExplodeViaBleInitiated);
+
+  uint8_t GetBattery();
 };
 
 #endif

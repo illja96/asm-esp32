@@ -7,6 +7,7 @@
 #include "AirsoftSmartMineBLECharacteristics.h"
 #include "AirsoftSmartMineBLECharacteristicIndexes.h"
 
+#include "../Callbacks/BatteryBLECharacteristicCallbacks.h"
 #include "../Callbacks/VersionBLECharacteristicCallbacks.h"
 #include "../Callbacks/RuntimeInSecBLECharacteristicCallbacks.h"
 #include "../Callbacks/ModeBLECharacteristicCallbacks.h"
@@ -25,6 +26,8 @@ private:
 
 public:
   static void Initialize(AirsoftSmartMineSettings *airsoftSmartMineSettings);
+
+  static BLECharacteristicCallbacks *Battery;
 
   static BLECharacteristicCallbacks *Version;
   static BLECharacteristicCallbacks *RuntimeInSec;

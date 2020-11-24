@@ -2,6 +2,7 @@
 
 const std::string AirsoftSmartMineBLECharacteristicCallbacks::_EspLogTag = "AirsoftSmartMineBLECharacteristicCallbacks";
 
+BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Battery = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Version = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::RuntimeInSec = nullptr;
 BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::Mode = nullptr;
@@ -14,6 +15,8 @@ BLECharacteristicCallbacks *AirsoftSmartMineBLECharacteristicCallbacks::All[Airs
 void AirsoftSmartMineBLECharacteristicCallbacks::Initialize(AirsoftSmartMineSettings *airsoftSmartMineSettings)
 {
   ESP_LOGI(_EspLogTag, "Initialize");
+
+  AirsoftSmartMineBLECharacteristicCallbacks::Battery = new BatteryBLECharacteristicCallbacks(airsoftSmartMineSettings);
 
   AirsoftSmartMineBLECharacteristicCallbacks::Version = new VersionBLECharacteristicCallbacks();
   AirsoftSmartMineBLECharacteristicCallbacks::All[AirsoftSmartMineBLECharacteristicIndexes::Version] = AirsoftSmartMineBLECharacteristicCallbacks::Version;

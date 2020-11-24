@@ -46,6 +46,8 @@ void setup()
 
   AirsoftSmartMineBLECharacteristicCallbacks::Initialize(airsoftSmartMineSettings);
 
+  batteryLevel = airsoftSmartMineSettings->GetBattery();
+
   ESP_LOGI(_EspLogTag, "Initializing BLE device");
   BLEDevice::init("Airsoft smart mine");
 
@@ -150,12 +152,10 @@ void updateBatteryLevel()
 {
   ESP_LOGI(_EspLogTag, "updateBatteryLevel");
 
-  // TODO: Get battery level from real source
-  const uint8_t currentBatteryLevel = 0;
+  const uint8_t currentBatteryLevel = airsoftSmartMineSettings->GetBattery();
   if (currentBatteryLevel != batteryLevel)
   {
     batteryLevel = currentBatteryLevel;
-    batteryBleCharacteristic->setValue(&batteryLevel, 1);
 
     if (isClientConnected)
     {
