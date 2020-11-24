@@ -1,5 +1,4 @@
-FROM illja96/arduino-cli:0.13.0
-VOLUME /mnt/artifacts
+FROM illja96/arduino-cli:0.13.0 AS build
 
 ARG BUILD_NUMBER
 RUN test -n "${BUILD_NUMBER}" || (echo "BUILD_NUMBER argument not provided" && false)
@@ -14,4 +13,7 @@ WORKDIR /usr/src/AirsoftSmartMine
 COPY . ./
 RUN sed -i "s|AirsoftSmartMineBLECharacteristicDefaultValues::Version = 0;|AirsoftSmartMineBLECharacteristicDefaultValues::Version = $BUILD_NUMBER;|g" src/Constants/AirsoftSmartMineBLECharacteristicDefaultValues.cpp
 
-RUN arduino-cli compile --fqbn esp32:esp32:d32 --build-path /mnt/atrifacts
+RUN arduino-cli compile --fqbn esp32:esp32:d32
+
+FROM scratch
+COPY --from=build /usr/src/AirsoftSmartMine/build/esp32:esp32:d32 ./
