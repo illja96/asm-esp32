@@ -2,7 +2,6 @@
 #define AirsoftSmartMinePins_H_
 
 #include <Arduino.h>
-#include <BLEDevice.h>
 
 class AirsoftSmartMinePins
 {
@@ -12,6 +11,7 @@ private:
 public:
   static const uint8_t BlueLed;
   static const uint8_t Battery;
+  static const uint8_t ExplosionRelay;
 };
 
 #endif

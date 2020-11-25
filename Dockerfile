@@ -16,4 +16,4 @@ RUN sed -i "s|AirsoftSmartMineBLECharacteristicDefaultValues::Version = 0;|Airso
 RUN arduino-cli compile --fqbn esp32:esp32:d32
 
 FROM scratch
-COPY --from=build /usr/src/AirsoftSmartMine/build/esp32:esp32:d32 ./
+COPY --from=build /usr/src/AirsoftSmartMine/build/esp32.esp32.d32 ./

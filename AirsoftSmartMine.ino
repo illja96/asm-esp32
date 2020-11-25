@@ -13,6 +13,7 @@
 #include "src/Constants/AirsoftSmartMineBLECharacteristicDefaultValues.h"
 #include "src/Constants/AirsoftSmartMineBLECharacteristicProperties.h"
 #include "src/Constants/AirsoftSmartMineBLECharacteristicCallbacks.h"
+#include "src/Constants/AirsoftSmartMinePins.h"
 #include "src/Callbacks/AirsoftSmartMineBLEServerCallbacks.h"
 #include "src/Callbacks/AirsoftSmartMineBLEServerSecurityCallbacks.h"
 
@@ -37,6 +38,7 @@ BLECharacteristic *customBleCharacteristics[AirsoftSmartMineBLECharacteristics::
 void setup()
 {
   Serial.begin(115200);
+  pinMode(AirsoftSmartMinePins::ExplosionRelay, OUTPUT);
 
   ESP_LOGI(_EspLogTag, "setup");
 
@@ -194,11 +196,14 @@ void initiateExplosion()
 
   const uint32_t explodeDurationInMs = airsoftSmartMineSettings->GetExplodeDurationInMs();
 
-  // TODO: Initiate explosion
   airsoftSmartMineSettings->SetIsExploded(true);
 
   customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::IsExploded]->notify();
   customBleCharacteristics[AirsoftSmartMineBLECharacteristicIndexes::IsExploded]->indicate();
+
+  digitalWrite(AirsoftSmartMinePins::ExplosionRelay, HIGH);
+  vTaskDelay(explodeDurationInMs / portTICK_PERIOD_MS);
+  digitalWrite(AirsoftSmartMinePins::ExplosionRelay, LOW);
 }
 
 void notifyRuntimeInSecCharacteristics()
